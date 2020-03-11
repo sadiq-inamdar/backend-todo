@@ -4,6 +4,9 @@ const Usercontroller = require("../Controllers/user");
 const Taskcontroller = require("../Controllers/task");
 const { signupValidator } = require("../validator");
 
+router.get("/",(req,res) => {
+    res.send("server is up and listening");
+});
 router.post("/login", Usercontroller.login);
 router.post("/addUser", signupValidator, Usercontroller.addUser);
 router.get("/logout", Usercontroller.logout);

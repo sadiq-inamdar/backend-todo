@@ -4,7 +4,6 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express();
-const session = require("express-session");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const expressValidator = require("express-validator");
@@ -23,7 +22,7 @@ mongoose
 // Middleware
 app.use(morgan("dev")); // logger for terminal
 app.use(bodyParser.json()); // to read the data
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors());
 app.use(cookieParser());
 app.use(expressValidator());
 

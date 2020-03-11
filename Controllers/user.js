@@ -6,22 +6,6 @@ require("dotenv").config();
 
 const {ObjectId} = require('mongodb');
 
-// exports.findUserByEmail = (obj, callback) => {
-//   user.findOne(
-//     {
-//       email: obj.email,
-//       password: obj.password
-//     },
-//     (error, data) => {
-//       if (error) {
-//         cb(error, null);
-//       } else {
-//         cb(null, data);
-//       }
-//     }
-//   );
-// };
-
 exports.addUser = async (req, res) => {
   const userExists = await User.findOne({ email: req.body.email });
   if (userExists)
@@ -73,16 +57,9 @@ exports.getTasks = (req,res) => {
   },
   {
       usertasks : {
-          $slice : [Number(req.body.skip_count),11]
+          $slice : [Number(req.body.skip_count),Number(req.body.tasks_On_One_Page)+1]
       }
   }).populate(query).exec((error,result) => {
-      // if(error)
-      // {
-      //     callback(error,null);
-      // }
-      // else {
-      //     callback(null,result);
-      // }
       if(error) {
         return res.status(500).json({
           error: "Internal Server Error",

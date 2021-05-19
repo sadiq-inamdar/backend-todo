@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  backend:
+    container_name: backend
+    restart: always
+    build: .
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongo
+    networks:
+      - express-mongo
+    ports:
+      - 3000:3000
+
+  mongo:
+    container_name: mongo
+    restart: always
+    image: mongo:4.2.0
+    volumes:
+      - ./data:/data/db
+    networks:
+      - express-mongo
+    ports:
+      - 27017:27017
+
+networks:
+  express-mongo:
